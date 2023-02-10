@@ -1,0 +1,23 @@
+marker
+while read p; do
+  grep -n $p locations.txt | awk -F "\"*,\"*" '{print "L.marker([" $3 "," $4 "]).addTo(map).bindPopup(" "\x27" $2 "\x27" ").openPopup();" }'
+done < data.txt
+
+
+
+circleMarker
+while read p; do
+  grep -n $p locations.txt | awk -F "\"*,\"*" '{print "L.circleMarker([" $3 "," $4 "], {radius: 10}).addTo(map);" }'
+done < data.txt
+
+circle
+while read p; do
+  grep -n $p locations.txt | awk -F "\"*,\"*"  '{print "L.circle([" $3 "," $4 "], {color:" "\x27" "red" "\x27" ",fillColor:" "\x27" "#f03" "\x27" ",fillOpacity: 0.5, radius: 3000}).addTo(map).bindPopup(" "\x27" $2 "\x27" ");" }'
+done < data.txt
+
+
+
+guncel, gruplu 
+while read p; do
+  grep -n $p locations.txt | awk -F "\"*,\"*" '{print "[" $3 "," $4 "," "\x27" $2 "\x27" "]," }' >> export.txt
+done < data.txt
